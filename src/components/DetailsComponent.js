@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import {Input, Label, Form, Row, Col} from 'reactstrap';
 
 function DetailsComponent(props) {
     const customer = props.customer;
@@ -7,16 +8,59 @@ function DetailsComponent(props) {
             <div className="row">
                 <div className="card my-2">
                     <div className="card-body">
-                        <div className="row d-flex justify-content-around align-items-center">
-                            <div className="col">
-                                <ul className="list-group">
-                                    <li className="list-group-item">{data.name}</li>
-                                    <li className="list-group-item">{data.amount}</li>
-                                    <li className="list-group-item">{data.email}</li>
-                                    <li className="list-group-item">{data.paymentMethodId}</li>
-                                </ul>
+                        <div className="row d-flex align-items-center">
+                            <div className="col-sm-10">
+                                    <Form>
+                                        <Row>
+                                        <Col className="col-sm-2">
+                                            <Label>FirstName:</Label>
+                                            </Col>
+                                            <Col className="col-sm-10" >
+                                            <Input className="displaydata" type="text" readOnly="true" value={data.firstName}></Input>
+                                        </Col>
+                                        </Row>
+                                        <Row>
+                                        <Col className="col-sm-2">
+                                            <Label>LastName:</Label>
+                                            </Col>
+                                            <Col  className="col-sm-10">
+                                            <Input className="displaydata" type="text" readOnly="true" value={data.lastName}></Input>
+                                        </Col>
+                                        </Row>
+                                        <Row>
+                                        <Col className="col-sm-2">
+                                            <Label>Email:</Label>
+                                            </Col>
+                                            <Col className="col-sm-10">
+                                            <Input className="displaydata" type="email" readOnly="true" value={data.email}></Input>
+                                        </Col>
+                                        </Row>
+                                        <Row>
+                                        <Col className="col-sm-2">
+                                            <Label>TotalPrice:</Label>
+                                            </Col>
+                                            <Col className="col-sm-10">
+                                            <Input className="displaydata" type="text" readOnly="true" value={data.orders.map(item => {
+                                        const value = item.items.reduce((acc, total) => acc + (total.quantity * total.price), 0);
+                                        return Math.floor(value) + "€";
+                                    })}></Input>
+                                        </Col>
+                                        </Row>
+                                        <Row>
+                                        <Col className="col-sm-2">
+                                            <Label>TotalItems:</Label>
+                                            </Col>
+                                            <Col className="col-sm-10">
+                                            <Input className="displaydata" type="text" readOnly="true" value={data.orders.map(item => {
+                                        const value = item.items.reduce((acc, total) => acc + total.quantity, 0);
+                                        return Math.floor(value);
+                                    })}></Input>
+                                        </Col>
+                                        </Row>
+            
+                                    </Form>
                             </div>
-                            <div className="col">
+                            <div className="col-sm-2">
                                 <button className="btn btn-danger m-3" onClick={() => props.deleteCustomerDetails(data.id)}>
                                     <i className="fa fa fa-trash fa-lg  "></i></button>
                             </div>
@@ -25,7 +69,7 @@ function DetailsComponent(props) {
                 </div>
 
             </div>
-            </div>
+        </div>
     })
     return <div >
         <p>{customerDetails}</p>
