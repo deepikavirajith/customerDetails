@@ -14,7 +14,7 @@ class HomeComponent extends Component {
             userLName: "",
             userEmail: "",
             loading: false,
-            value: "",
+            cost: "",
             quantity: "",
             itemName: ""
 
@@ -50,18 +50,69 @@ class HomeComponent extends Component {
         });
     }
     handleChange(event) {
+        console.log(event.target.value);
+        console.log(this.state.itemName);
         event.preventDefault();
+        const currentVal = event.target.value;
+        switch (currentVal) {
+            case "Staubsauger":
+                this.setState({
+                    cost: 14.9
+                });
+                break;
+            case "Monitorstand":
+                this.setState({
+                    cost: 16.3
+                });
+                break;
+            case "Textblock":
+                this.setState({
+                    cost: 1.8
+                });
+                break;
+            case "MacBook Pro":
+                this.setState({
+                    cost: 749.5
+                });
+                break;
+            case "Mate Tee":
+                this.setState({
+                    cost: 1.99
+                });
+                break;
+            case "Dogecoin":
+                this.setState({
+                    cost: 2
+                });
+                break;
+            case "Kaffeetasse":
+                this.setState({
+                    cost: 4.99
+                });
+                break;
+
+
+            default:
+                this.setState({
+                    cost: "try again"
+                });
+                break;
+        }
+
         this.setState({
             itemName: event.target.value
         });
     }
+
+
     customerAmount(event) {
         event.preventDefault();
         this.setState({
-            value: event.target.value
-        });
-        
+            cost: event.target.value
+        })
+
     }
+
     customerQuantity(event) {
         event.preventDefault();
         this.setState({
@@ -108,7 +159,7 @@ class HomeComponent extends Component {
                                 {
                                     itemName: this.state.itemName,
                                     quantity: this.state.quantity,
-                                    price: this.state.value
+                                    price: this.state.cost
                                 }
                             ]
 
@@ -121,7 +172,7 @@ class HomeComponent extends Component {
                         userLName: "",
                         userEmail: "",
                         quantity: "",
-                        value: "",
+                        cost: "",
                         itemName: ""
 
                     });
@@ -177,21 +228,22 @@ class HomeComponent extends Component {
                                 </div>
                                 <div className='m-2'>
                                     <select className='form-control' value={this.state.itemName} onChange={this.handleChange}>
-                                        <option>Select Product</option>
+                                        <option>Select..</option>
                                         <option value="Staubsauger">Staubsauger</option>
-                                        <option value={16.3}>Monitorstand</option>
-                                        <option value={1.8}>Textblock</option>
-                                        <option value={749.5}>MacBook Pro</option>
-                                        <option value={1.99}>Mate Tee</option>
-                                        <option value={2}>Dogecoin</option>
-                                        <option value={4.99}>Kaffeetasse</option>
+                                        <option value="Monitorstand">Monitorstand</option>
+                                        <option value="Textblock">Textblock</option>
+                                        <option value="MacBook Pro">MacBook Pro</option>
+                                        <option value="Mate Tee">Mate Tee</option>
+                                        <option value="Dogecoin">Dogecoin</option>
+                                        <option value="Kaffeetasse">Kaffeetasse</option>
                                     </select>
                                 </div>
+
                                 <div className='m-2'>
                                     <Input type="number" placeholder='quantity' value={this.state.quantity} onChange={this.customerQuantity}></Input>
                                 </div>
                                 <div className='m-2'>
-                                    <Input type="number"  value={this.state.itemName} readOnly="true"></Input>
+                                    <Input value={this.state.cost} readOnly="true" onChange={this.customerAmount}></Input>
                                 </div>
                                 <div className='m-2'>
                                     <button type="submit" className='btn btn-primary' >submit</button>
