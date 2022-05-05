@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'reactstrap';
+import { Form, Input } from 'reactstrap';
 import axios from 'axios';
 import { baseUrl } from './baseUrl';
 import DetailsComponent from './DetailsComponent';
@@ -246,7 +246,7 @@ class HomeComponent extends Component {
                                     <Input value={this.state.cost} readOnly="true" onChange={this.customerAmount}></Input>
                                 </div>
                                 <div className='m-2'>
-                                    <button type="submit" className='btn btn-primary' >submit</button>
+                                    <button type="submit" className='btn btn-primary m-2' >submit</button>
                                 </div>
                             </Form>
                         </div>
